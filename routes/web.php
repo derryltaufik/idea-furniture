@@ -18,7 +18,6 @@ Route::get('/', function(){
     return redirect('/home');
 });
 
-//test
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/productType/{id}', 'ProductTypeController@index');
 Route::get('/product/{id}', 'ProductController@index');
