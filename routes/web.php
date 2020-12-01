@@ -22,14 +22,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/productType/{id}', 'ProductTypeController@index');
 Route::get('/product/{id}', 'ProductController@index');
 
+// middleware untuk cek udah login atau belum
 Route::group(['middleware' => 'auth'], function () {
+    // middleware untuk check role user yg lagi login itu member atau tidak
     Route::group(['middleware' => 'check.member'], function (){
         Route::get('/editProfile/{id}');
         Route::get('/cart/{id}');
         Route::get('/transactionHistory/{id}');
         Route::post('/product/{id}', 'ProductController@addToCart');
     });
-    
+    // middleware untuk check role user yg lagi login itu admin atau tidak
     Route::group(['middleware' => 'check.admin'], function () {
         Route::get('/productType/update/{id}', 'ProductTypeController@updateProductType');
         Route::post('/productType/update/{id}', 'ProductTypeController@saveUpdateProductType');
