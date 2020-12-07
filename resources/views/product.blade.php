@@ -15,36 +15,38 @@
                                 <p class="card-subtitle text-muted" style="font-size: 8pt">{{$product->description}}</p>
                                 <h4 class="card-text">Rp{{$product->price}}</h4>
                                 <p class="card-title" style="font-size: 12pt">Stock: {{$product->stock}}</p>
-                                
-                                @if (Auth::user()->role == 'member')
-                                    <hr/>
-                                    <form action="" method="post" class="form-inline">
-                                        @csrf
-                                        <div class="form-group row">
-                                            <label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
-                
-                                            <div class="col-md-6">
-                                                <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required autofocus>
-                
-                                                @error('quantity')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group row ml-5">
-                                            <button type="submit" class="btn btn-primary">
-                                                {{ __('Add to Cart') }}
-                                            </button>
-                                        </div>
-                                    </form>
-                                    
-                                    @if (session('success'))
-                                        <article class="text-success">
-                                            {{session('success')}}
-                                        </article>
+                                @if (Auth::check())
+                                    @if (Auth::user()->role == 'member')
+                                        <hr/>
+                                        <form action="" method="post" class="form-inline">
+                                            @csrf
+                                            <div class="form-group row">
+                                                <label for="quantity" class="col-md-4 col-form-label text-md-right">{{ __('Quantity') }}</label>
+
+                                                <div class="col-md-6">
+                                                    <input id="quantity" type="text" class="form-control @error('quantity') is-invalid @enderror" name="quantity" required autofocus>
+
+                                                    @error('quantity')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row ml-5">
+                                                <button type="submit" class="btn btn-primary">
+                                                    {{ __('Add to Cart') }}
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        @if (session('success'))
+                                            <article class="text-success">
+                                                {{session('success')}}
+                                            </article>
+                                        @endif
                                     @endif
                                 @endif
                             </div>
