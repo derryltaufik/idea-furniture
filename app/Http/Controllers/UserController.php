@@ -7,12 +7,14 @@ use App\User;
 
 class UserController extends Controller
 {
+    // return the view to edit profile with current user data
     public function editProfile($id){
         $user = User::find($id);
 
         return view('editProfile')->with('user',$user);
     }
 
+    // validate edit profile form, update the database if success
     public function saveProfile(Request $request, $id){
         $request->validate([
             'name' => ['required', 'string', 'min:6'],
