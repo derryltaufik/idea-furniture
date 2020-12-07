@@ -8,14 +8,14 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="">
                         @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" rows="3"></textarea>
+                                <textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" rows="3">{{ $user->address }}</textarea>
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <div class="input-group date">
                                     <span class="input-group-addon"></span>
-                                    <input id="datepicker" type="text" class="form-control @error('date_of_birth') is-invalid @enderror" readonly name="date_of_birth" value="{{ old('date_of_birth') }}">
+                                    <input id="datepicker" type="text" class="form-control @error('date_of_birth') is-invalid @enderror" readonly name="date_of_birth" value="{{ $user->date_of_birth }}">
 
                                     @error('date_of_birth')
                                         <span class="invalid-feedback" role="alert">
@@ -61,14 +61,14 @@
 
                             <div class="col-md-6" id="gender">
                                 <div class="form-check  @error('date_of_birth') is-invalid @enderror">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" {{old('gender') == 'Male' ? 'checked' : ''}}>
+                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" {{$user->gender == 'Male' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="genderMale">
                                         Male
                                     </label>
                                 </div>
 
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" {{old('gender') == 'Female' ? 'checked' : ''}}>
+                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" {{$user->gender == 'Female' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="genderFemale">
                                         Female
                                     </label>
@@ -89,6 +89,16 @@
                                 </button>
                             </div>
                         </div>
+
+                        @if (session('success'))
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <article class="text-success ">
+                                        {{session('success')}}
+                                    </article>
+                                </div>
+                            </div>
+                        @endif
                     </form>
                 </div>
             </div>
