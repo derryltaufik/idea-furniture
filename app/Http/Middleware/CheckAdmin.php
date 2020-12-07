@@ -8,6 +8,7 @@ class CheckAdmin
 {
     /**
      * Handle an incoming request.
+     * Check if the role of currrent user is admin
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

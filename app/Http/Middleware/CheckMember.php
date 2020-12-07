@@ -8,6 +8,7 @@ class CheckMember
 {
     /**
      * Handle an incoming request.
+     * Check if the role of currrent user is member
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
