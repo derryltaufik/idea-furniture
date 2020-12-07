@@ -17,7 +17,7 @@
     $( function() {
         $( "#datepicker" ).datepicker({
         showOn: "button",
-        buttonImage: "storage/icon/calendar.png",
+        buttonImage: "/storage/icon/calendar.png",
         buttonImageOnly: true,
         buttonText: "Select date",
         changeMonth: true,
