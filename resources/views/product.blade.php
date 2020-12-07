@@ -15,7 +15,6 @@
                                 <p class="card-subtitle text-muted" style="font-size: 8pt">{{$product->description}}</p>
                                 <h4 class="card-text">Rp{{$product->price}}</h4>
                                 <p class="card-title" style="font-size: 12pt">Stock: {{$product->stock}}</p>
-
                                 @if (Auth::check())
                                     @if (Auth::user()->role == 'member')
                                         <hr/>
