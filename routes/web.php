@@ -26,7 +26,8 @@ Route::get('/product/{id}', 'ProductController@index');
 Route::group(['middleware' => 'auth'], function () {
     // middleware untuk check role user yg lagi login itu member atau tidak
     Route::group(['middleware' => 'check.member'], function (){
-        Route::get('/editProfile/{id}');
+        Route::get('/editProfile/{id}', 'UserController@editProfile');
+        Route::post('/editProfile/{id}', 'UserController@saveProfile');
         Route::get('/cart/{id}');
         Route::get('/transactionHistory/{id}');
         Route::post('/product/{id}', 'ProductController@addToCart');
