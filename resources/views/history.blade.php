@@ -25,17 +25,17 @@
                                 </td>
                                 <td class="align-middle">
                                     <p class="font-weight-light">Price:</p>
-                                    <p class="font-weight-bold">Rp. {{$detail->product->price}}</p>
+                                    <p class="font-weight-bold">Rp. {{number_format($detail->product->price,0,',','.')}}</p>
                                 </td>
                                 <td class="align-middle">
                                     <p class="font-weight-light">SubTotal:</p>
-                                    <p class="font-weight-bold">Rp. {{$detail->product->price * $detail->quantity}}</p>
+                                    <p class="font-weight-bold">Rp. {{number_format($detail->product->price * $detail->quantity,0,',','.')}}</p>
                                 </td>
                             </tr>
                         @endforeach
                     </table>
 
-                    <h5 style="margin-left:75%">Grand Total: <span class="font-weight-bold" >Rp. {{$header->grand_total}}</span></h5>
+                    <h5 style="margin-left:75%">Grand Total: <span class="font-weight-bold" >Rp. {{number_format($header->grand_total,0,',','.')}}</span></h5>
                     <hr/>
                 @endforeach
             </div>
