@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // create eloquent relationship with cart
+    public function cart(){
+        return $this->hasOne('App\Cart');
+    }
+
+    // create eloquent relationship with transaction header
+    public function transactionHeaders(){
+        return $this->hasMany('App\TransactionHeader');
+    }
 }

@@ -28,10 +28,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'check.member'], function (){
         Route::get('/editProfile/{id}', 'UserController@editProfile');
         Route::post('/editProfile/{id}', 'UserController@saveProfile');
-        Route::get('/cart/{id}');
-        Route::get('/transactionHistory/{id}');
+        Route::get('/cart/{id}', 'TransactionController@indexCart');
+        Route::post('/cart/{id}/update/{itemId}', 'TransactionController@updateItem');
+        Route::post('/cart/{id}/delete/{itemId}', 'TransactionController@deleteItem');
+        Route::post('/cart/{id}/checkout', 'TransactionController@checkout');
+        Route::get('/transactionHistory/{id}', 'TransactionController@indexHistory');
         Route::post('/product/{id}', 'ProductController@addToCart');
     });
+
     // middleware untuk check role user yg lagi login itu admin atau tidak
     Route::group(['middleware' => 'check.admin'], function () {
         Route::get('/productType/update/{id}', 'ProductTypeController@updateProductType');

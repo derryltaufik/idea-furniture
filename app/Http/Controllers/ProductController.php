@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Product;
 use App\ProductType;
+use App\Cart;
 
 class ProductController extends Controller
 {
@@ -21,6 +22,17 @@ class ProductController extends Controller
         $request->validate([
             'quantity' => "numeric | between:1,$product->stock",
         ]);
+
+        if($cart = Cart::where('product_id',$id)->where('user_id',\Auth::user()->id)->first()){
+            $cart->quantity = $cart->quantity + $request->quantity;
+            $cart->save();
+        }else{
+            $cart = new Cart;
+            $cart->user_id = \Auth::user()->id;
+            $cart->product_id = $id;
+            $cart->quantity = $request->quantity;
+            $cart->save();
+        }
 
         return back()->with('success','Product has been added to cart!');
     }
@@ -49,12 +61,12 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->price = $request->price;
         $product->description = $request->description;
-        
+
         if(isset($request->image)){
             $image = $request->image;
             $ext = $image->getClientOriginalExtension();
             Storage::putFileAs('public/product/'.$product->productType->name, $image, $request->name . '.' . $ext);
-            
+
             $product->image = 'product/'.$product->productType->name . '/' . $request->name . '.' . $ext;
         }else{
             $product->image = null;
@@ -95,7 +107,7 @@ class ProductController extends Controller
             $ext = $image->getClientOriginalExtension();
             Storage::delete('public/'.$product->image);
             Storage::putFileAs('public/product/'.$product->productType->name, $image, $request->name . '.' . $ext);
-            
+
             $product->image = 'product/'.$product->productType->name . '/' . $request->name . '.' . $ext;
         }else{
             $imagePath = explode(".",$product->image);
@@ -105,7 +117,7 @@ class ProductController extends Controller
             Storage::move('public/'.$oldPath, 'public/'.$product->image);
         }
         $product->save();
-        
+
         return back()->with('success','Product has been updated');
     }
 
