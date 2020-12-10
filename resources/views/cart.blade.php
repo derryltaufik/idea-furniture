@@ -30,11 +30,11 @@
                             </td>
                             <td class="align-middle">
                                 <p class="font-weight-light">Price:</p>
-                                <p class="font-weight-bold">Rp. {{$cartItem->product->price}}</p>
+                                <p class="font-weight-bold">Rp. {{number_format($cartItem->product->price,0,',','.')}}</p>
                             </td>
                             <td class="align-middle">
                                 <p class="font-weight-light">SubTotal:</p>
-                                <p class="font-weight-bold">Rp. {{$cartItem->product->price * $cartItem->quantity}}</p>
+                                <p class="font-weight-bold">Rp. {{number_format($cartItem->product->price * $cartItem->quantity,0,',','.')}}</p>
                             </td>
                             <td class="align-middle">
                                 <form action="{{url()->current()}}/delete/{{$cartItem->id}}" method="post">
@@ -47,7 +47,7 @@
                         </tr>
                     @endforeach
                 </table>
-                <h4>Grand Total: <span class="font-weight-bold" >Rp. {{$grandTotal}}</span></h4>
+                <h4>Grand Total: <span class="font-weight-bold" >Rp. {{number_format($grandTotal,0,',','.')}}</span></h4>
                 <form action="{{url()->current()}}/checkout" class="ml-auto" method="post">
                     @csrf
                     <input type="hidden" value="{{$grandTotal}}" name="grandTotal">
